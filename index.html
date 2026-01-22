@@ -2,29 +2,51 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <title>মৃত্যু নিবন্ধন যাচাই</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>মৃত্যু নিবন্ধন অনুসন্ধান - BDRIS</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f4f4f4; }
-        .search-box { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); display: inline-block; }
-        input { margin: 10px; padding: 10px; width: 250px; border: 1px solid #ccc; border-radius: 5px; }
-        button { padding: 10px 20px; background: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px; }
-        .captcha-box { background: #eee; padding: 10px; margin: 10px; font-weight: bold; letter-spacing: 5px; }
+        body { font-family: 'SolaimanLipi', Arial, sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
+        h2 { color: #1a73e8; margin-bottom: 25px; font-size: 22px; }
+        .input-group { text-align: left; margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
+        .captcha-container { background: #fafafa; border: 1px dashed #bbb; padding: 10px; margin: 20px 0; border-radius: 6px; }
+        .captcha-img { width: 220px; height: 70px; display: block; margin: 0 auto 10px; border: 1px solid #eee; background: white; }
+        button { width: 100%; padding: 14px; background-color: #28a745; color: white; border: none; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+        button:hover { background-color: #218838; }
+        .footer-text { margin-top: 20px; font-size: 12px; color: #888; }
     </style>
 </head>
 <body>
-    <div class="search-box">
-        <h2>মৃত্যু নিবন্ধন তথ্য অনুসন্ধান</h2>
-        <form action="/generate" method="get">
-            <input type="text" name="reg" placeholder="১৭ ডিজিটের নিবন্ধন নম্বর" required><br>
-            <input type="date" name="dob" required><br>
-            
-            <div class="captcha-box">
-                <img src="https://bdris.gov.bd/br/captcha" alt="Captcha Image"> 
-            </div>
-            <input type="text" name="captcha" placeholder="ক্যাপচা কোডটি লিখুন" required><br>
-            
-            <button type="submit">অনুসন্ধান করুন</button>
-        </form>
+
+<div class="container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Government_Seal_of_Bangladesh.svg" width="60" alt="Seal">
+    <h2>মৃত্যু নিবন্ধন অনুসন্ধান</h2>
+    
+    <form action="/generate" method="get">
+        <div class="input-group">
+            <label>জন্ম নিবন্ধন নম্বর (১৭ ডিজিট)</label>
+            <input type="text" name="reg" placeholder="যেমন: 9787513676121435" required maxlength="17">
+        </div>
+
+        <div class="input-group">
+            <label>জন্ম তারিখ</label>
+            <input type="date" name="dob" required>
+        </div>
+
+        <div class="captcha-container">
+            <img src="/get_captcha" class="captcha-img" alt="ক্যাপচা লোড হচ্ছে...">
+            <input type="text" name="captcha" placeholder="উপরের ক্যাপচাটি এখানে লিখুন" required>
+        </div>
+
+        <button type="submit">অনুসন্ধান করুন</button>
+    </form>
+    
+    <div class="footer-text">
+        © ২০২৬ রেজিস্ট্রার জেনারেলের কার্যালয়, জন্ম ও মৃত্যু নিবন্ধন
     </div>
+</div>
+
 </body>
 </html>
