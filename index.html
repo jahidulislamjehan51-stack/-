@@ -2,35 +2,29 @@
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>মৃত্যু নিবন্ধন অনুসন্ধান</title>
+    <title>মৃত্যু নিবন্ধন যাচাই</title>
     <style>
-        body { font-family: 'Arial', sans-serif; background-color: #f4f4f4; display: flex; flex-direction: column; align-items: center; padding: 20px; }
-        .search-box { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 400px; }
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
-        .footer-text { margin-top: 20px; font-size: 12px; color: #666; }
+        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; background-color: #f4f4f4; }
+        .search-box { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); display: inline-block; }
+        input { margin: 10px; padding: 10px; width: 250px; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 10px 20px; background: #28a745; color: white; border: none; cursor: pointer; border-radius: 5px; }
+        .captcha-box { background: #eee; padding: 10px; margin: 10px; font-weight: bold; letter-spacing: 5px; }
     </style>
 </head>
 <body>
     <div class="search-box">
-        <h2 style="text-align: center;">মৃত্যু সনদ অনুসন্ধান</h2>
-        <label>মৃত্যু নিবন্ধন নম্বর (১৭ ডিজিট):</label>
-        <input type="text" id="reg_no" placeholder="যেমন: 2018xxxxxxxxxxxxx">
-        <label>জন্ম তারিখ:</label>
-        <input type="date" id="dob">
-        <button onclick="generateCertificate()">সনদ দেখুন</button>
+        <h2>মৃত্যু নিবন্ধন তথ্য অনুসন্ধান</h2>
+        <form action="/generate" method="get">
+            <input type="text" name="reg" placeholder="১৭ ডিজিটের নিবন্ধন নম্বর" required><br>
+            <input type="date" name="dob" required><br>
+            
+            <div class="captcha-box">
+                <img src="https://bdris.gov.bd/br/captcha" alt="Captcha Image"> 
+            </div>
+            <input type="text" name="captcha" placeholder="ক্যাপচা কোডটি লিখুন" required><br>
+            
+            <button type="submit">অনুসন্ধান করুন</button>
+        </form>
     </div>
-    <p class="footer-text">তথ্যগুলো সরাসরি bdris.gov.bd থেকে সংগ্রহ করা হবে।</p>
-
-    <script>
-        function generateCertificate() {
-            const regNo = document.getElementById('reg_no').value;
-            const dob = document.getElementById('dob').value;
-            if(regNo.length < 17) { alert("সঠিক ১৭ ডিজিটের নম্বর দিন"); return; }
-            // এখানে পাইথন ব্যাকএন্ডের লিঙ্ক যুক্ত হবে
-            window.location.href = `/generate?reg=${regNo}&dob=${dob}`;
-        }
-    </script>
 </body>
 </html>
