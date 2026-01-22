@@ -1,0 +1,145 @@
+# -<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Death Certificate</title>
+    <style>
+        body {
+            font-family: 'Siyam Rupali', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .certificate-container {
+            width: 800px;
+            background-color: white;
+            padding: 50px;
+            border: 2px solid #000;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        /* জলছাপের জন্য স্টাইল */
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.1;
+            z-index: 0;
+            width: 400px;
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h2 { margin: 0; font-size: 24px; }
+        .header h3 { margin: 5px 0; font-size: 20px; }
+        .title {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .title h1 {
+            display: inline-block;
+            border-bottom: 2px solid #000;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        .info-section {
+            line-height: 1.8;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        .row { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .data-label { font-weight: bold; }
+        .data-value { border-bottom: 1px dotted #000; flex-grow: 1; margin-left: 10px; min-height: 20px; }
+        
+        /* বক্স নম্বর বা কোড বক্সের জন্য */
+        .box-container {
+            border: 1px solid #000;
+            padding: 2px 10px;
+            display: inline-block;
+        }
+        
+        .footer {
+            margin-top: 80px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature-box {
+            text-align: center;
+            width: 250px;
+        }
+        .signature-line {
+            border-top: 1px solid #000;
+            margin-top: 50px;
+            padding-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="certificate-container">
+    <div class="watermark">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Government_Seal_of_Bangladesh.svg" width="400" alt="seal">
+    </div>
+
+    <div class="content">
+        <div style="text-align: right;">(ইউপিজমানি ফরম- ৬)</div>
+        
+        <div class="header">
+            <h2>গণপ্রজাতন্ত্রী বাংলাদেশ</h2>
+            <h3>জন্ম ও মৃত্যু নিবন্ধকের কার্যালয়</h3>
+            <p><strong>হাসান নগর ইউনিয়ন পরিষদ</strong><br>বোরহানউদ্দিন, ভোলা</p>
+        </div>
+
+        <div class="title">
+            <h1>মৃত্যু সনদ</h1>
+            <p>[বিধি- ১২, জন্ম ও মৃত্যু নিবন্ধন (ইউনিয়ন পরিষদ) বিধিমালা, ২০০৬]<br>(মৃত্যু নিবন্ধন বহি হইতে উদ্ধৃত)</p>
+        </div>
+
+        <div class="info-section">
+            <div class="row">
+                <div>নিবন্ধন বহি নং: <span class="box-container"></span></div>
+            </div>
+            <div class="row">
+                <div>নিবন্ধনের তারিখ: <span class="data-value"></span></div>
+                <div>প্রদানের তারিখ: <span class="data-value"></span></div>
+            </div>
+
+            <div class="row" style="margin-top: 15px;">
+                <div style="width: 100%;">মৃত্যু নিবন্ধন নং: <span class="box-container" style="letter-spacing: 5px; font-weight: bold;"></span></div>
+            </div>
+
+            <div class="row"><span class="data-label">নাম:</span> <span class="data-value"></span></div>
+            <div class="row">
+                <span class="data-label">মৃত্যুর তারিখ:</span> <span class="data-value"></span>
+                <span class="data-label" style="margin-left: 20px;">লিঙ্গ:</span> <span class="data-value"></span>
+            </div>
+            <div class="row"><span class="data-label">মৃত্যুর স্থান:</span> <span class="data-value"></span></div>
+            <div class="row"><span class="data-label">মৃত্যুর কারণ:</span> <span class="data-value"></span></div>
+            <div class="row"><span class="data-label">পিতার নাম:</span> <span class="data-value"></span></div>
+            <div class="row"><span class="data-label">মাতার নাম:</span> <span class="data-value"></span></div>
+            <div class="row"><span class="data-label">স্বামী/স্ত্রীর নাম:</span> <span class="data-value"></span></div>
+            <div class="row"><span class="data-label">স্থায়ী ঠিকানা:</span> <span class="data-value"></span></div>
+        </div>
+
+        <div class="footer">
+            <div class="signature-box">
+                <div class="signature-line">(ইউপি সচিব - স্বাক্ষর ও সিল)</div>
+            </div>
+            <div class="signature-box">
+                <div class="signature-line">(নিবন্ধকের স্বাক্ষর ও নামসহ সিল)</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
