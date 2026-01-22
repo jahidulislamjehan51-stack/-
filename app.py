@@ -4,20 +4,21 @@ from flask import Flask, request, render_template_string, Response
 
 app = Flask(__name__)
 
-# সরকারি সাইট থেকে ক্যাপচা ছবি সরাসরি টেনে আনার জন্য (প্রশ্নবোধক চিহ্ন ফিক্স)
+# সরকারি সাইট থেকে ক্যাপচা ছবি আপনার সাইটে টেনে আনার জন্য
 @app.route('/get_captcha')
 def get_captcha():
     captcha_url = "https://bdris.gov.bd/br/captcha"
     try:
-        # এটি সরকারি সাইট থেকে ছবি নিয়ে আসবে
-        response = requests.get(captcha_url, timeout=10)
+        # ব্রাউজার যেন মনে করে এটি সরকারি সাইট থেকেই আসছে
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        response = requests.get(captcha_url, headers=headers, stream=True, timeout=10)
         return Response(response.content, mimetype='image/png')
     except Exception as e:
         return f"Error: {str(e)}"
 
-# আপনার পিডিএফ স্টাইল ডিজাইন
+# পিডিএফ ডিজাইনের এইচটিএমএল (আপনার পাঠানো ডিজাইনের হুবহু)
 CERT_HTML = """
-<div style="border: 10px double #000; padding: 40px; width: 700px; margin: auto; font-family: 'Times New Roman'; background: #fff; position: relative;">
+<div style="border: 10px double #000; padding: 40px; width: 750px; margin: auto; font-family: 'Times New Roman'; background: #fff; position: relative;">
     <div style="text-align: center;">
         <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Government_Seal_of_Bangladesh.svg" width="70">
         <h2 style="margin:5px;">Government of the People's Republic of Bangladesh</h2>
@@ -30,10 +31,11 @@ CERT_HTML = """
         <p><strong>Name:</strong> {{ name_bn }} / {{ name_en }}</p>
         <p><strong>Father:</strong> {{ father }} | <strong>Mother:</strong> {{ mother }}</p>
         <p><strong>Date of Death:</strong> {{ dod }}</p>
+        <p><strong>Cause of Death:</strong> CARDIO RESPIRATORY FAILURE</p>
     </div>
     <div style="margin-top:40px; display: flex; justify-content: space-between; align-items: flex-end;">
         <div><img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data={{ reg_no }}" width="90"></div>
-        <div style="text-align: center;">_________________<br>Registrar Signature</div>
+        <div style="text-align: center; font-size: 14px;">_________________<br>Registrar Signature</div>
     </div>
 </div>
 """
@@ -49,7 +51,7 @@ def home():
 @app.route('/generate')
 def generate():
     reg = request.args.get('reg')
-    # সঠিক নম্বর দিলে আপনার পিডিএফ ডাটা আসবে
+    # সঠিক নম্বর (৯৭৮৭৫১৩৬৭৬১২১৪৩৫) দিলে আপনার ডাটা আসবে
     if reg == "9787513676121435":
         data = {
             "office": "Sonadia Union Parishad, Hatiya, Noakhali",
@@ -57,12 +59,12 @@ def generate():
             "name_bn": "ফারহানা বেগম",
             "name_en": "Farhana Begum",
             "father": "Sayef Uddin",
-            "mother": "Jahanara Bergum",
+            "mother": "Jahanara Begum",
             "dod": "2023-10-12"
         }
         return render_template_string(CERT_HTML, **data)
     else:
-        # ভুল নম্বরের জন্য সরাসরি এরর
+        # ভুল নম্বর দিলে সরকারি ডাটাবেস এরর আসবে
         return "<h2 style='color:red; text-align:center;'>Data Not Found!</h2><p style='text-align:center;'>সরকারি ডাটাবেসে এই নম্বরের কোনো তথ্য পাওয়া যায়নি।</p>"
 
 if __name__ == "__main__":
