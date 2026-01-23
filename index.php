@@ -267,3 +267,4 @@ img#uploadAnimation {
     });
  
     </script>
+
